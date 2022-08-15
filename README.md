@@ -28,10 +28,10 @@
     conda activate env_radar_pc3
     pip install mmwave==0.1.70
 
-| 專案內容|程式位置|
-| ------------ | ------------ |
-|呼吸心跳|heart_breath/combine_svm.py|
-|睡眠偵測|sleep/sleeping.py|
-|姿勢偵測|human_2022_07_13/human_2022_07_13.py|
-|動物偵測|animals/animal.py|
+| 專案內容|程式位置|conda 環境|
+| ------------ | ------------ |------------ |
+|呼吸心跳|heart_breath/combine_svm.py|env_radar|
+|睡眠偵測|sleep/sleeping.py|env_radar_sleep|
+|姿勢偵測|human_2022_07_13/human_2022_07_13.py|env_radar_pc3|
+|動物偵測|animals/animal.py|env_radar_pc3|
 
