@@ -178,8 +178,8 @@ v8len = 0
 
 pos = np.zeros((10000,3))
 color = [1.0, 0.0, 0.0, 1.0]
-# sp1 = gl.GLScatterPlotItem(pos=pos,color=color,size = 4.0)
-# sp2 = gl.GLScatterPlotItem(pos=pos,color=color,size = 4.0)
+sp1 = gl.GLScatterPlotItem(pos=pos,color=color,size = 4.0)
+sp2 = gl.GLScatterPlotItem(pos=pos,color=color,size = 4.0)
 line1 = gl.GLLinePlotItem(pos=np.array([[0,0,0], [1,1,1]]),color=[51,255,255, 255]) #自己+的
 line2 = gl.GLLinePlotItem(pos=np.array([[0,0,0], [1,1,1]]),color=[51,255,255, 255]) #自己+的
 line3 = gl.GLLinePlotItem(pos=np.array([[0,0,0], [1,1,1]]),color=[51,255,255, 255]) #自己+的
@@ -206,8 +206,8 @@ w.addItem(line9)
 w.addItem(line10)
 w.addItem(line11)
 w.addItem(line12)
-# w.addItem(sp1)
-# w.addItem(sp2)
+w.addItem(sp1)
+w.addItem(sp2)
 gcolorA = np.empty((10000,4), dtype=np.float32)
 #generate a color opacity gradient
 
@@ -217,11 +217,11 @@ def update():
 	global gcolorA,sensorA,mapSum,box1, people_state, maxlabel
 
 	# extract Labels
-	# sp1.setData(pos=sensorA[:,[0,1,2]],color=gcolorA)
+	sp1.setData(pos=sensorA[:,[0,1,2]],color=gcolorA)
 	# print("sensorA.type", sensorA.shape)
 	# print("sensorA[:,[0,1,2]]", sensorA[:,[0,1,2]])
 	# print("box[0,2,4]", [box[0,2,4]])	
-	# sp2.setData(pos=np.array([0,0,0]),color=[255,140,0,255]) # 成功畫點
+	sp2.setData(pos=np.array([0,0,0]),color=[255,140,0,255]) # 成功畫點
 
 	state_string = ["坐", "站", "臥", "跌"]
 	try:
@@ -556,13 +556,13 @@ def find_2d_boundbox(x):  # x, diff_pixel_number_xy, diff_pixel_number_yz, diff_
 	z_fall_lying.append(z_mean)
 	if len(z_fall_lying) > 10:
 		z_fall_lying.pop(0)
-	if z_mean > 0.8:  # z_men > 0.8 (reset to 0)
+	if z_mean > 0.7:  # z_men > 0.8 (reset to 0) # before 0.8
 		state_fall_lying = 0
 	else:
 		if len(z_fall_lying) > 9:
 			tmp_threshold = np.mean(z_fall_lying[:5])
 			dif_z_thr = np.abs(tmp_threshold - z_mean)
-			if dif_z_thr > 0.2:  # add: 放寬閾值
+			if dif_z_thr > 0.67:  # add: 放寬閾值 0.7 => all lying, 0.5 => all fall, 0.65 => tmp OK
 				state_fall_lying = 1
 
 	lenofz = z_max - z_min
@@ -570,7 +570,7 @@ def find_2d_boundbox(x):  # x, diff_pixel_number_xy, diff_pixel_number_yz, diff_
 	lenofy = y_max - y_min
 
 	if lenofz/lenofx >= 1 or lenofz/lenofy >= 1 or lenofx == 0 or lenofy == 0:  # add: lenofx == 0 or lenofy == 0 (除 0 error)
-		if z_mean > (stardand / 10) * 8:
+		if z_mean > (stardand / 10) * 7.3:
 			state = 1 # 站
 		elif lenofz/lenofx < 0.85 or lenofz/lenofy < 0.85:  # defalt = 0.6
 			if state_fall_lying == 0:
