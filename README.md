@@ -1,3 +1,4 @@
+# Python on Jetson NANO
 - 隨機森林權重太大[下載](https://drive.google.com/file/d/1kYTANnP9ZgzEemOCabRLeRnXyRc3I72K/view?usp=sharing "下載")至sleep/save資料夾內
 - 每次重開機需要設定權限 `sudo chmod 777 /dev/ttyTHS1`
 
@@ -36,3 +37,6 @@
 |姿勢偵測|human/human_v1.0.py|env_radar_pc3|
 |動物偵測|animals/animal_v1.0.py|env_radar_pc3|
 
+# Python on PC Base
+- 隨機森林權重太大[下載](https://drive.google.com/file/d/1kYTANnP9ZgzEemOCabRLeRnXyRc3I72K/view?usp=sharing "下載")至sleep/save資料夾內
+- 安裝環境 `conda env create -f conda_env.yaml`
